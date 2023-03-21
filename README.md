@@ -10,3 +10,9 @@ Funcionalidades:
 -	Publicações de imagens e textos.
 -	Segurança dos dados.
 -	Interface amigável e intuitiva.
+
+Stakeholders:
+-	Kelvin Willian
+-	Eduardo Veiga
+-	Bruno Rocha
+-	Willian Tezolin
