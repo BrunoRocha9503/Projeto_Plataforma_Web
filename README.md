@@ -5,3 +5,8 @@ Pré-requisitos:
 - Possuir contas em mídias sociais que serão utilizadas nesta plataforma.
 - Acesso à Web via Desktop.
 
+Funcionalidades: 
+-	Integração com outras plataformas
+-	Publicações de imagens e textos.
+-	Segurança dos dados.
+-	Interface amigável e intuitiva.
