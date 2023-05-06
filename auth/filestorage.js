@@ -1,20 +1,48 @@
-const fs = require('fs');
-const path = require('path');
+const { MongoClient } = require('mongodb');
 
-const DATA_FILE = path.join(__dirname, 'data.json');
+const uri = 'mongodb+srv://eduardokash:projetoweb@cluster0.kptier4.mongodb.net/?retryWrites=true&w=majority';
 
-function readData() {
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const COLLECTION_NAME = 'usuarios';
+
+async function withMongoDb(callback) {
+  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   try {
-    const rawData = fs.readFileSync(DATA_FILE);
-    return JSON.parse(rawData);
+    await client.connect();
+    const db = client.db('socialblend'); // Substitua pelo nome do seu banco de dados
+    const collection = db.collection(COLLECTION_NAME);
+    return await callback(collection);
   } catch (err) {
-    return [];
+    console.error('Erro ao trabalhar com o MongoDB:', err);
+    throw err;
+  } finally {
+    await client.close();
   }
 }
 
-function writeData(data) {
-  const jsonData = JSON.stringify(data, null, 2);
-  fs.writeFileSync(DATA_FILE, jsonData);
+function readData() {
+  return withMongoDb(async (collection) => {
+    const data = await collection.find({}).toArray();
+    return data;
+  });
 }
 
-module.exports = { readData, writeData };
+function writeData(data) {
+  return withMongoDb(async (collection) => {
+    await collection.deleteMany({});
+    await collection.insertMany(data);
+  });
+}
+
+async function findUserByEmail(email) {
+  return await withMongoDb(async collection => {
+    return await collection.findOne({ email: email });
+  });
+}
+async function findUserById(id) {
+  return await withMongoDb(async collection => {
+    return await collection.findOne({ id: id });
+  });
+}
+
+module.exports = { readData, writeData, findUserByEmail, findUserById };
