@@ -9,55 +9,49 @@
     <title>Pagina inicial</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand">SocialBlend</a>
-                <div class="d-flex">
-                    <a href="/perfil"><button class="btn btn-md btn-secondary">Perfil</button></a>
-                </div>
-            </div>
+    <header>
+        <div>
+          <img class="logo img-fluid" src="/img/logo_SocialBlend.png"/>
+        </div>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="/index">Início</a></li>
+            <li><a href="/perfil">Perfil</a></li>
+            <li><a href="/">Sair</a></li>
+          </ul> 
         </nav>
-    </div>
-    <div class="container">
-        <div class="row mt-5 justify-content-center">
-            <h5 class="text-center d-block">Postagem</h5>
-            <div class="col-md-5 mt-5">
-                <form>
-                    <div class="form-group mt-2">
-                        <label class="form-label" for="email">E-mail:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail...">
-                    </div>
-                    <div class="form-group mt-2">
-                        <label class="form-label" for="conteudo">Conteudo:</label>
-                        <textarea class="form-control" id="conteudo" placeholder="Escreva seu texto..."></textarea>
-                    </div>
-                    <div class="col-6">
-                            <button type="button" class="btn btn-success mt-4" data-bs-toggle="modal" data-bs-target="#enviar" style="width: 30%">Enviar</button>
-                    </div>
-                </form>
-                <div class="col-6 mt-2">
-                    <a href="/"><button class="btn btn-md btn-secondary" style="width: 30%">Sair</button></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="enviar" tabindex="-1" aria-labelledby="enviarlabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"  id="envairlabel">Envio</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <h5>Envio realizado com successo !</h5>
-                </div>
-                <div class="modal-footer">
-                   <a href="/index"><button type="button" class="btn btn-success">Concluir</button></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</body>
+    </header>
+  
+    <main>
+      <section class="publicacao">
+        <h1>Olá, <%= nomeUsuario %>!</h1>
+        <h2>Faça sua publicação</h2>
+        <form>
+          <textarea name="texto" placeholder="Digite seu texto aqui"></textarea>
+          <input type="file" name="imagem" accept="image/*"><br/><br/>
+          <button type="submit">Publicar</button>
+        </form>
+      </section>
+  
+      <section class="feed">
+        <h2>Feed de publicações</h2>
+        <ul>
+          <li>
+            <div class="autor">Autor da publicação</div>
+            <div class="data">Data da publicação</div>
+            <div class="texto">Texto da publicação</div>
+          </li>
+        </ul>
+      </section>
+    </main>
+  
+    <footer>
+      <p>© 2023 Social Blend. Todos os direitos reservados.</p>
+      <ul>
+        <li><a href="#">Política de privacidade</a></li>
+        <li><a href="#">Termos de uso</a></li>
+      </ul>
+    </footer>
+  </body>
+  </html>
 </html>

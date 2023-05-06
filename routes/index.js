@@ -29,7 +29,8 @@ router.post('/login', passport.authenticate('local', {
 
 router.get('/index', (req, res) => {
     if (req.isAuthenticated()) {
-      res.render('index');
+      const nomeUsuario = req.user.nome;
+      res.render('index', {nomeUsuario});
     } else {
       res.redirect('/');
     }
