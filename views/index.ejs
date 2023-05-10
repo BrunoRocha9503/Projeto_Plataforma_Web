@@ -21,18 +21,16 @@
           </ul> 
         </nav>
     </header>
-  
     <main>
       <section class="publicacao">
-        <h1>Olá, <%= nomeUsuario %>!</h1>
-        <h2>Faça sua publicação</h2>
+        <h1>Olá, <b><%= nomeUsuario %>!</b></h1>
+        <h5>Faça sua publicação</h5>
         <form>
           <textarea name="texto" placeholder="Digite seu texto aqui"></textarea>
           <input type="file" name="imagem" accept="image/*"><br/><br/>
           <button type="submit">Publicar</button>
         </form>
       </section>
-  
       <section class="feed">
         <h2>Feed de publicações</h2>
         <ul>
@@ -44,7 +42,6 @@
         </ul>
       </section>
     </main>
-  
     <footer>
       <p>© 2023 Social Blend. Todos os direitos reservados.</p>
       <ul>

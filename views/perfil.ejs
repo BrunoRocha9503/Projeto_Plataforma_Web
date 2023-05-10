@@ -10,33 +10,37 @@
 </head>
 <body>
 	<header>
-        <div><img class="logo img-fluid" src="/img/logo.png"/></div>
+        <div>
+          <img class="logo img-fluid" src="/img/logo_SocialBlend.png"/>
+        </div>
         <nav>
-          <ul>
-			<li><a href="/index">Início</a></li>
-			<li><a href="/perfil">Perfil</a></li>
-			<li><a href="/">Sair</a></li>
-          </ul>
+          <ul class="nav-list">
+            <li><a href="/index">Início</a></li>
+            <li><a href="/perfil">Perfil</a></li>
+            <li><a href="/">Sair</a></li>
+          </ul> 
         </nav>
-      </header>
+    </header>
 	<section class="perfil">
-		<img src="imagem-de-perfil.jpg" alt="Imagem de perfil">
+		<img src="/img/imagem_perfil.webp" alt="Imagem de perfil">
 
-		<h2>Nome do usuário</h2>
-		<p>Email: usuario@mail.com</p>
-		<p>Data de nascimento: 01/01/2000</p>
-		<p>País: Brasil</p>
+		<p><b>Nome:</b> <%= nomeUsuario %></p>
+		<hr>
+		<p><b>Email:</b> <%= emailUsuario %></p>
+		<hr>
+		<p><b>Data de nascimento:</b> <%= dataNasc %></p>
+		<hr>
 
 		<a href="#">Editar perfil</a>
 	</section>
 
 	<footer>
+		<p>© 2023 Social Blend. Todos os direitos reservados.</p>
 		<ul>
-			<li><a href="#">Termos de uso</a></li>
-			<li><a href="#">Política de privacidade</a></li>
-			<li><a href="#">Contato</a></li>
+		  <li><a href="#">Política de privacidade</a></li>
+		  <li><a href="#">Termos de uso</a></li>
 		</ul>
-	</footer>
+	  </footer>
 </body>
 </html>
 </html>

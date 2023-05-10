@@ -2,10 +2,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
   }
   
-  body {
-    font-family: Arial, sans-serif;
+  body { 
     font-size: 16px;
   }
   
@@ -43,10 +43,6 @@
     padding: 20px;
   }
   
-  .logo{
-  
-  }
-
   .publicacao {
     margin-bottom: 40px;
   }
@@ -67,7 +63,7 @@
   }
   
   .publicacao button {
-    background-color: #333;
+    background-color: #20B383;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -145,7 +141,7 @@
 	display: inline-block;
 	margin-top: 20px;
 	padding: 10px 20px;
-	background-color: #333;
+	background-color: #20B383;
 	color: #fff;
 	text-decoration: none;
 	border-radius: 5px;
@@ -153,7 +149,7 @@
 }
 
 .perfil a:hover {
-	background-color: #fff;
+	background-color: #007D52;
 }
   
   footer {
@@ -184,4 +180,77 @@
   
   footer a:hover {
   text-decoration: underline;
+  }
+
+  .login{
+    align-items: center;
+    justify-content: center;
+    background-color: #F4FAFF;
+    width: 30%;
+    height: 60vh;
+  }
+
+  .login .row{
+    justify-content: center;
+  }
+
+  .login input{
+    border-radius: 30px;
+  }
+
+  .login button[type="submit"] {
+    background-color: #20B383;
+    color: #fff;  
+    border-radius: 30px;
+    width: 100%;
+    padding: 5px;
+  }
+
+  .login button:hover {
+    background-color: #007D52;
+  }
+
+  .login a {
+    color: #0098FA;
+    text-decoration: none;
+  }
+
+  .login a:hover{
+    color: #007fd4;
+  }
+
+  .cadastro{
+    align-items: center;
+    justify-content: center;
+    background-color: #F4FAFF;
+    width: 30%;
+    height: 70vh;
+  }
+  .cadastro .row{
+    justify-content: center;
+  }
+
+  .cadastro input{
+    border-radius: 30px;
+  }
+
+  .cadastro button[type="submit"] {
+    background-color: #20B383;
+    color: #fff;  
+    border-radius: 30px;
+    width: 100%;
+    padding: 5px;
+  }
+
+  .cadastro button:hover {
+    background-color: #007D52;
+  }
+
+  .cadastro a {
+    color: #0098FA;
+    text-decoration: none;
+  }
+
+  .cadastro a:hover{
+    color: #007fd4;
   }

@@ -38,7 +38,10 @@ router.get('/index', (req, res) => {
 
 router.get('/perfil', (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('perfil');
+    const nomeUsuario = req.user.nome;
+    const emailUsuario = req.user.email;
+    const dataNasc = req.user.data;
+    res.render('perfil', {nomeUsuario, emailUsuario, dataNasc});
   } else {
     res.redirect('/');
   }
