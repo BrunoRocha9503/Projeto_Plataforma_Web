@@ -27,6 +27,15 @@ router.post('/login', passport.authenticate('local', {
   })
 );
 
+router.get('/login/google', 
+  passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+router.get('/login/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/error' }),
+  function(req, res) {
+    res.redirect('/index');
+  });
+
 router.get('/index', (req, res) => {
     if (req.isAuthenticated()) {
       const nomeUsuario = req.user.nome;
