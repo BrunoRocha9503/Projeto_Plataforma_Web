@@ -46,6 +46,20 @@ router.get(
     failureRedirect: "/",
   })
 );
+router.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", {
+    scope: ["profile", "email"],
+  })
+);
+
+router.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "/index",
+    failureRedirect: "/",
+  })
+);
 
 router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {

@@ -15,6 +15,8 @@ const { findUserByEmail, findUserById } = require("./auth/filestorage");
 const { google } = require("googleapis");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 
+const FacebookStrategy = require('passport-facebook').Strategy;
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -66,10 +68,27 @@ passport.use(
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
-      console.log(profile);
       return done(null, profile);
     }
   )
+);
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: process.env.CALLBACK_URL_FB,
+}, (accessToken, refreshToken, profile, done) => {
+  done(null, profile);
+}));
+
+// Rotas para o login com o Facebook
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+      successRedirect: '/index',
+      failureRedirect: '/login'
+  })
 );
 
 passport.serializeUser((user, done) => {
