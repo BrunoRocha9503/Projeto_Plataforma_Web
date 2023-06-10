@@ -3,8 +3,10 @@ const router = express.Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const { readData, writeData } = require("../auth/filestorage");
+const multer = require('multer');
 
 let users = [];
+let postagens = [];
 
 async function loadUsers() {
   try {
@@ -15,6 +17,17 @@ async function loadUsers() {
 }
 
 loadUsers();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads'); // diretório onde os arquivos serão salvos
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 router.get("/", (req, res) => {
   res.render("login", {
@@ -63,8 +76,10 @@ router.get(
 
 router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {
+    const imagePath ="";
+    const texto = "";
     const nomeUsuario = req.user.nome || req.user.displayName;
-    res.render("index", { nomeUsuario });
+    res.render("index", { nomeUsuario, texto, imagePath });
   } else {
     res.redirect("/");
   }
@@ -104,6 +119,13 @@ router.post("/cadastro", async (req, res) => {
   }
 });
 
+router.post("/publicar", upload.single('imagem'), (req, res) => {
+  const imagePath = `/uploads/${req.file.filename}`;
+  const nomeUsuario = req.user.nome || req.user.displayName;
+  const texto = req.body.texto;
+  res.render("index", { nomeUsuario, texto, imagePath });
+});
+ 
 router.get("/logout", (req, res) => {
   const successMessage = "Você saiu da sua conta";
   req.session.destroy((err) => {

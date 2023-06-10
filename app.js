@@ -12,6 +12,9 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const { findUserByEmail, findUserById } = require("./auth/filestorage");
 
+const multer = require('multer');
+
+
 const { google } = require("googleapis");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 
@@ -81,16 +84,6 @@ passport.use(new FacebookStrategy({
   done(null, profile);
 }));
 
-// Rotas para o login com o Facebook
-app.get('/auth/facebook', passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {
-      successRedirect: '/index',
-      failureRedirect: '/login'
-  })
-);
-
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -103,6 +96,8 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Algo deu errado!");
 });
+
+app.use('/uploads', express.static('uploads'));
 
 app.use("/", routes);
 

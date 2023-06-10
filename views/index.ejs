@@ -26,32 +26,23 @@
     </header>
     <main>
       <section class="publicacao">
-        <h1>Olá, <b>
-            <%= nomeUsuario %>!
-          </b></h1>
+        <h1>Olá, <b><%= nomeUsuario %>!</b></h1>
         <h5>Faça sua publicação</h5>
-        <form>
+        <form action="/publicar" method="post" enctype="multipart/form-data">
           <textarea name="texto" placeholder="Digite seu texto aqui"></textarea>
           <input type="file" name="imagem" accept="image/*"><br /><br />
+          <input type="checkbox" id="compartilharFace" data-href="https://developers.facebook.com/docs/plugins/" value="compartilharFace"/>
+          <label for ="compartilharFace"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" 
+            class="fb-xfbml-parse-ignore">Compartilhar no Facebook</a></label></br>
           <button type="submit">Publicar</button>
-          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="" data-size=""><a target="_blank" href="#" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
         </form>
       </section>
-      <body>
-        <h1>Criar Post</h1>
-        <form action="/create-post" method="post">
-            <textarea name="message" placeholder="Digite seu post"></textarea>
-            <button type="submit">Postar</button>
-        </form>
-    </body>
       <section class="feed">
         <h2>Feed de publicações</h2>
-        <ul>
-          <li>
-            <div class="autor">Autor da publicação</div>
-            <div class="data">Data da publicação</div>
-            <div class="texto">Texto da publicação</div>
-          </li>
+        <ul id="post-list">
+          <li><p>Nome: <%= nomeUsuario %></p></li>
+          <li><p>Texto: <%= texto %></p></li>
+          <img class="logo img-fluid" src="<%= imagePath %>" alt="Imagem selecionada" />
         </ul>
       </section>
     </main>
@@ -62,33 +53,5 @@
         <li><a href="#">Termos de uso</a></li>
       </ul>
     </footer>
-  </body>
-  <body>
-    
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{1005679387458315}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{v.17}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v17.0&appId=1005679387458315&autoLogAppEvents=1" nonce="5jmGEXqd"></script>
-
-  </body>
-
-  </html>
+</body>
+</html>
