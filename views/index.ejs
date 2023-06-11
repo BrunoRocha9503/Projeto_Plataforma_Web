@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< Updated upstream
 <lang="PT-BR">
 
   <head>
@@ -55,3 +56,130 @@
     </footer>
 </body>
 </html>
+=======
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>Página inicial</title>
+</head>
+
+<body>
+  <header>
+    <div>
+      <img class="logo img-fluid" src="/img/logo_SocialBlend.png" alt="Logo Social Blend">
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="/index">Início</a></li>
+        <li><a href="/perfil">Perfil</a></li>
+        <li><a href="/">Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="publicacao">
+      <h1>Olá, <b><%= nomeUsuario %>!</b></h1>
+      <h5>Faça sua publicação</h5>
+      <form enctype="multipart/form-data" id="publicacaoForm" onsubmit="submitForm(event)">
+        <textarea name="texto" id="textoInput" placeholder="Digite seu texto aqui"></textarea>
+        <div class="mb-3">
+          <label for="photoInput" class="form-label">Selecione uma imagem</label>
+          <input type="file" id="photoInput" name="imagem" accept="image/*" class="form-control">
+        </div>
+        <button onclick="postPhoto()" type="button" class="btn btn-primary">Postar Foto</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>© 2023 Social Blend. Todos os direitos reservados.</p>
+    <ul>
+      <li><a href="#">Política de privacidade</a></li>
+      <li><a href="#">Termos de uso</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function postPhoto() {
+      var accessToken = 'EAAIrPCTrJg8BAF9QyDV18Tow9pWmRSgdPhUNIcigwnXhZBM7HR3aMsdpJa5ckEjausndve9qKYP4yPgbt9e1UwQZCk4eRBNU0M2GLujwbIXAowj8gBV4gbL8RCfqoazO8ewL3E2n6zRJDjhiT3SgoZCZAs4u5yyMSzwaDoeZAENJujGvAizFK';
+      var fileInput = document.getElementsByName('imagem')[0];
+      var photoFile = fileInput.files[0];
+      var formData = new FormData();
+      formData.append('source', photoFile);
+
+      fetch('https://graph.facebook.com/me/photos?access_token=' + accessToken, {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Foto postada no Facebook:', data);
+          var postId = data.post_id;
+          var textoInput = document.getElementById('textoInput');
+          var texto = textoInput.value;
+
+          // Adiciona o texto como descrição da foto
+          addDescriptionToPhoto(postId, texto);
+        })
+        .catch(error => {
+          console.error('Erro ao postar foto no Facebook:', error);
+          // Faça algo em caso de erro ao postar a foto
+        });
+    }
+
+    function addDescriptionToPhoto(postId, texto) {
+      var accessToken = 'EAAIrPCTrJg8BAF9QyDV18Tow9pWmRSgdPhUNIcigwnXhZBM7HR3aMsdpJa5ckEjausndve9qKYP4yPgbt9e1UwQZCk4eRBNU0M2GLujwbIXAowj8gBV4gbL8RCfqoazO8ewL3E2n6zRJDjhiT3SgoZCZAs4u5yyMSzwaDoeZAENJujGvAizFK';
+      var description = texto;
+
+      fetch('https://graph.facebook.com/' + postId + '?access_token=' + accessToken, {
+        method: 'POST',
+        body: 'message=' + description
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Descrição adicionada à foto:', data);
+          // Faça algo após adicionar a descrição com sucesso
+        })
+        .catch(error => {
+          console.error('Erro ao adicionar descrição à foto:', error);
+          // Faça algo em caso de erro ao adicionar a descrição
+        });
+    }
+
+    document.getElementById('publicacaoForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      postPhoto();
+      this.submit();
+    });
+  </script>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: 'FACEBOOK_CLIENT_ID',
+        cookie: true,
+        xfbml: true,
+        version: 'v17.0'
+      });
+
+      FB.AppEvents.logPageView();
+
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+</body>
+
+</html>
+>>>>>>> Stashed changes
