@@ -28,7 +28,7 @@
     <section class="publicacao">
       <h1>Olá, <b><%= nomeUsuario %>!</b></h1>
       <h5>Faça sua publicação</h5>
-      <form enctype="multipart/form-data" id="publicacaoForm" onsubmit="submitForm(event)">
+      <form action="/publicar" method="post" enctype="multipart/form-data" id="publicacaoForm" onsubmit="submitForm(event)">
         <textarea name="texto" id="textoInput" placeholder="Digite seu texto aqui"></textarea>
         <div class="mb-3">
           <label for="photoInput" class="form-label">Selecione uma imagem</label>
@@ -36,6 +36,14 @@
         </div>
         <button onclick="postPhoto()" type="button" class="btn btn-primary">Postar Foto</button>
       </form>
+    </section>
+    <section class="feed">
+      <h2>Feed de publicações</h2>
+      <ul id="post-list">
+        <li><p>Nome: <%= nomeUsuario %></p></li>
+        <li><p>Texto: <%= texto %></p></li>
+        <img class="logo img-fluid" src="<%= imagePath %>" alt="Imagem selecionada" />
+      </ul>
     </section>
   </main>
   <footer>
@@ -48,7 +56,7 @@
 
   <script>
     function postPhoto() {
-      var accessToken = '#';
+      var accessToken = '<%= token %>';
       var fileInput = document.getElementsByName('imagem')[0];
       var photoFile = fileInput.files[0];
       var formData = new FormData();
@@ -75,7 +83,7 @@
     }
 
     function addDescriptionToPhoto(postId, texto) {
-      var accessToken = '#';
+      var accessToken = '<%= token %>';
       var description = texto;
 
       fetch('https://graph.facebook.com/' + postId + '?access_token=' + accessToken, {

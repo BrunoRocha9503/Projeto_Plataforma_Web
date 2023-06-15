@@ -1,82 +1,86 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  body { 
-    font-size: 16px;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0c2840;
-    color: #fff;
-    padding: 10px 20px;
-  }
-  
-  nav ul {
-    display: flex;
-    list-style: none;
-  }
-  
-  nav li {
-    margin-right: 20px;
-  }
-  
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  nav a:hover {
-    color: #ddd;
-  }
-  
-  main {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .publicacao {
-    margin-bottom: 40px;
-  }
-  
-  .publicacao h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .publicacao textarea {
-    width: 100%;
-    height: 200px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    resize: vertical;
-    margin-bottom: 10px;
-  }
-  
-  .publicacao button {
-    background-color: #20B383;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .publicacao button:hover {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0c2840;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #ddd;
+}
+
+main {
+  flex: 1;
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.publicacao {
+  margin-bottom: 40px;
+}
+
+.publicacao h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.publicacao textarea {
+  width: 100%;
+  height: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.publicacao button {
+  background-color: #20B383;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.publicacao button:hover {
   background-color: #555;
-  }
-  
-  .feed {
+}
+
+.feed {
   margin-bottom: 40px;
   }
   
@@ -151,36 +155,34 @@
 .perfil a:hover {
 	background-color: #007D52;
 }
-  
-  footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+
+footer {
   background-color: #0c2840;
   color: #fff;
   text-align: center;
-  }
-  
-  footer ul {
+  padding: 10px;
+  margin-top: auto;
+}
+
+footer ul {
   list-style: none;
   margin-top: 10px;
   display: flex;
   justify-content: center;
-  }
-  
-  footer li {
+}
+
+footer li {
   margin-right: 10px;
-  }
-  
-  footer a {
+}
+
+footer a {
   color: #fff;
   text-decoration: none;
-  }
-  
-  footer a:hover {
+}
+
+footer a:hover {
   text-decoration: underline;
-  }
+}
 
   .login{
     align-items: center;

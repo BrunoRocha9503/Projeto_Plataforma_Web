@@ -76,10 +76,11 @@ router.get(
 
 router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {
-    const imagePath ="/uploads/download.png";
+    const token = process.env.SESSION_SECRET_FB;
+    const imagePath ="";
     const texto = "";
     const nomeUsuario = req.user.nome || req.user.displayName;
-    res.render("index", { nomeUsuario, texto, imagePath });
+    res.render("index", { nomeUsuario, texto, imagePath, token });
   } else {
     res.redirect("/");
   }
