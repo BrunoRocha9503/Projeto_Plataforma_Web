@@ -26,9 +26,10 @@
   </header>
   <main>
     <section class="publicacao">
-      <h1>Olá, <b><%= nomeUsuario %>!</b></h1>
+      <h1>Olá,<b><%= nomeUsuario %>!</b></h1>
       <h5>Faça sua publicação</h5>
-      <form action="/publicar" method="post" enctype="multipart/form-data" id="publicacaoForm" onsubmit="submitForm(event)">
+      <form action="/publicar" method="post" enctype="multipart/form-data" id="publicacaoForm"
+        onsubmit="submitForm(event)">
         <textarea name="texto" id="textoInput" placeholder="Digite seu texto aqui"></textarea>
         <div class="mb-3">
           <label for="photoInput" class="form-label">Selecione uma imagem</label>
@@ -40,9 +41,6 @@
     <section class="feed">
       <h2>Feed de publicações</h2>
       <ul id="post-list">
-        <li><p>Nome: <%= nomeUsuario %></p></li>
-        <li><p>Texto: <%= texto %></p></li>
-        <img class="logo img-fluid" src="<%= imagePath %>" alt="Imagem selecionada" />
       </ul>
     </section>
   </main>
@@ -75,6 +73,10 @@
 
           // Adiciona o texto como descrição da foto
           addDescriptionToPhoto(postId, texto);
+
+          var imagePath = URL.createObjectURL(photoFile); // Obtém a URL da imagem local
+          // Adiciona a foto no feed de publicações
+          addPhotoToFeed(postId, texto, imagePath);
         })
         .catch(error => {
           console.error('Erro ao postar foto no Facebook:', error);
@@ -101,13 +103,34 @@
         });
     }
 
-    document.getElementById('publicacaoForm').addEventListener('submit', function(event) {
+    function addPhotoToFeed(postId, texto, imagePath) {
+      var postList = document.getElementById('post-list');
+
+      // Cria elementos HTML para exibir a foto e informações no feed
+      var liElement = document.createElement('li');
+      var nameElement = document.createElement('p');
+      var textElement = document.createElement('p');
+      var imageElement = document.createElement('img');
+
+      nameElement.textContent = 'Nome: <%= nomeUsuario %>';
+      textElement.textContent = 'Texto: ' + texto;
+      imageElement.className = 'logo img-fluid';
+      imageElement.src = imagePath; // Define a imagem selecionada como a origem da imagem
+      imageElement.alt = 'Imagem selecionada';
+
+      liElement.appendChild(nameElement);
+      liElement.appendChild(textElement);
+      liElement.appendChild(imageElement);
+      postList.appendChild(liElement);
+    }
+
+    document.getElementById('publicacaoForm').addEventListener('submit', function (event) {
       event.preventDefault();
       postPhoto();
       this.submit();
     });
   </script>
-  
+
   <script>
     window.fbAsyncInit = function () {
       FB.init({

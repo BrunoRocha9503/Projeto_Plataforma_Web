@@ -2,11 +2,10 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { readData, writeData } = require("../auth/filestorage");
+const { readData, writeData, atualizarPerfil } = require("../auth/filestorage");
 const multer = require('multer');
 
 let users = [];
-let postagens = [];
 
 async function loadUsers() {
   try {
@@ -45,30 +44,14 @@ router.post(
   })
 );
 
-router.get(
-  "/auth/google",
+router.get("/auth/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
   })
 );
 
-router.get(
-  "/auth/google/callback",
+router.get("/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/index",
-    failureRedirect: "/",
-  })
-);
-router.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", {
-    scope: ["profile", "email"],
-  })
-);
-
-router.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", {
     successRedirect: "/index",
     failureRedirect: "/",
   })
@@ -77,7 +60,7 @@ router.get(
 router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {
     const token = process.env.SESSION_SECRET_FB;
-    const imagePath ="";
+    const imagePath = "";
     const texto = "";
     const nomeUsuario = req.user.nome || req.user.displayName;
     res.render("index", { nomeUsuario, texto, imagePath, token });
@@ -106,7 +89,7 @@ router.post("/cadastro", async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = {
       id: Date.now(),
-      name: req.body.nome,
+      nome: req.body.nome,
       email: req.body.email,
       data: req.body.data,
       password: hashedPassword,
@@ -114,6 +97,7 @@ router.post("/cadastro", async (req, res) => {
     users.push(user);
     await writeData(users);
     res.redirect("/");
+
   } catch (err) {
     req.flash("error", "Ocorreu um erro ao tentar criar a conta");
     res.redirect("/cadastro");
@@ -126,7 +110,7 @@ router.post("/publicar", upload.single('imagem'), (req, res) => {
   const texto = req.body.texto;
   res.render("index", { nomeUsuario, texto, imagePath });
 });
- 
+
 router.get("/logout", (req, res) => {
   const successMessage = "Você saiu da sua conta";
   req.session.destroy((err) => {
@@ -137,5 +121,26 @@ router.get("/logout", (req, res) => {
     res.render("login", { message: null, success: successMessage });
   });
 });
+
+router.post("/atualizarperfil", async (req, res) => {
+  if (req.isAuthenticated()) {
+    try {
+      const nomeUsuario = req.body.nomeUsuario;
+      const emailUsuario = req.body.emailUsuario;
+      const dataNasc = req.body.dataNasc;
+
+      await atualizarPerfil(emailUsuario, nomeUsuario, dataNasc);
+      console.log(nomeUsuario);
+
+      res.redirect("/perfil");
+    } catch (err) {
+      console.error("Erro ao editar perfil:", err);
+      res.redirect("/perfil");
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
 
 module.exports = router;

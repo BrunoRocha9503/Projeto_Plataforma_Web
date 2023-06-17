@@ -14,17 +14,15 @@ const { findUserByEmail, findUserById } = require("./auth/filestorage");
 
 const multer = require('multer');
 
-
 const { google } = require("googleapis");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
-
-const FacebookStrategy = require('passport-facebook').Strategy;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -32,6 +30,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -54,6 +53,7 @@ passport.use(
             return done(null, false, { message: "Senha incorreta" });
           }
         });
+        
       } catch (err) {
         console.error(err);
         return done(err);
@@ -75,14 +75,6 @@ passport.use(
     }
   )
 );
-
-passport.use(new FacebookStrategy({
-  clientID: process.env.FACEBOOK_CLIENT_ID,
-  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  callbackURL: process.env.CALLBACK_URL_FB,
-}, (accessToken, refreshToken, profile, done) => {
-  done(null, profile);
-}));
 
 passport.serializeUser((user, done) => {
   done(null, user);
