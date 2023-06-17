@@ -22,7 +22,7 @@
         </nav>
     </header>
 	<section class="perfil">
-		<img src="/img/imagem_perfil.webp" alt="Imagem de perfil">
+		<img src="<%= imagemPerfil %>" alt="Imagem de perfil">
 
 		<p><b>Nome:</b> <%= nomeUsuario %></p>
 		<hr>
@@ -30,30 +30,9 @@
 		<hr>
 		<p><b>Data de nascimento:</b> <%= dataNasc %></p>
 		<hr>
-
-		<button id="editarPerfilBtn" class="btn btn-primary">Editar perfil</button>
-
-		<form id="editarPerfilForm" style="display: none;" action="/atualizarperfil" method="POST">
-
-			<div class="mb-3">
-				<label for="emailUsuario" class="form-label">Email:</label>
-				<input type="email" id="emailUsuario" name="emailUsuario" class="form-control" value="<%= emailUsuario %>">
-			</div>
-
-			<div class="mb-3">
-				<label for="nomeUsuario" class="form-label">Nome:</label>
-				<input type="text" id="nomeUsuario" name="nomeUsuario" class="form-control" value="<%= nomeUsuario %>">
-			</div>
-
-			<div class="mb-3">
-				<label for="dataNasc" class="form-label">Data de nascimento:</label>
-				<input type="date" id="dataNasc" name="dataNasc" class="form-control" value="<%= dataNasc %>">
-			</div>
-
-			<button type="submit" class="btn btn-primary">Salvar</button>
-		</form>
+		<button type="button" class="btn btn-lg"><a href="/editarPerfil">Editar</a></button>		
+		  
 	</section>
-
 	<footer>
 		<p>© 2023 Social Blend. Todos os direitos reservados.</p>
 		<ul>
@@ -61,41 +40,5 @@
 		  <li><a href="#">Termos de uso</a></li>
 		</ul>
 	</footer>
-
-	<script>
-		const editarPerfilBtn = document.getElementById("editarPerfilBtn");
-		const editarPerfilForm = document.getElementById("editarPerfilForm");
-
-		editarPerfilBtn.addEventListener("click", () => {
-			editarPerfilBtn.style.display = "none";
-			editarPerfilForm.style.display = "block";
-		});
-
-		editarPerfilForm.addEventListener("submit", async (e) => {
-			e.preventDefault();
-
-			const nomeUsuario = document.getElementById("nomeUsuario").value;
-			const emailUsuario = document.getElementById("emailUsuario").value;
-			const dataNasc = document.getElementById("dataNasc").value;
-
-			try {
-				const response = await fetch("/atualizarperfil", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body:({ nomeUsuario, emailUsuario, dataNasc }),
-				});
-
-				if (response.ok) {
-					location.reload();
-				} else {
-					console.error("Erro ao atualizar perfil:", response.statusText);
-				}
-			} catch (err) {
-				console.error("Erro ao atualizar perfil:", err);
-			}
-		});
-	</script>
 </body>
 </html>

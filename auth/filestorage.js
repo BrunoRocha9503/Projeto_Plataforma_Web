@@ -21,15 +21,14 @@ async function withMongoDb(callback) {
   }
 }
 
-async function atualizarPerfil(emailUsuario, nomeUsuario, dataNasc) {
+async function atualizarPerfil(idUsuario, emailUsuario, nomeUsuario, dataNasc) {
   try {
     await withMongoDb(async (collection) => {
       await collection.updateOne(
-        { email: emailUsuario },
-        { $set: { nome: nomeUsuario, data: dataNasc } }
+        { id: idUsuario },
+        { $set: { nome: nomeUsuario, email:emailUsuario, data: dataNasc } }
       );
       console.log("Perfil atualizado com sucesso.");
-      console.log(nomeUsuario);
     });
   } catch (err) {
     console.error("Erro ao atualizar perfil:", err);

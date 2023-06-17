@@ -156,6 +156,48 @@ main {
 	background-color: #007D52;
 }
 
+.perfilEdit {
+  width: 100%;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: center;
+}
+
+
+.perfilEdit img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.perfilEdit .container{
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: auto;
+}
+.perfilEdit .row{
+  justify-content: center;
+}
+
+.perfilEdit input{
+  border-radius: 30px;
+}
+
+.perfilEdit button[type="submit"] {
+  background-color: #20B383;
+  color: #fff;  
+  border-radius: 30px;
+  width: 100%;
+  padding: 5px;
+}
+
+.perfilEdit button:hover {
+  background-color: #007D52;
+}
+
 footer {
   background-color: #0c2840;
   color: #fff;

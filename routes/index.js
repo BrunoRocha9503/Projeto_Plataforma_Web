@@ -7,6 +7,10 @@ const multer = require('multer');
 
 let users = [];
 
+let imagePath = "";
+let texto = "";
+let nomeUsuario = "";
+
 async function loadUsers() {
   try {
     users = await readData();
@@ -60,9 +64,7 @@ router.get("/auth/google/callback",
 router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {
     const token = process.env.SESSION_SECRET_FB;
-    const imagePath = "";
-    const texto = "";
-    const nomeUsuario = req.user.nome || req.user.displayName;
+    nomeUsuario = req.user.nome || req.user.displayName;
     res.render("index", { nomeUsuario, texto, imagePath, token });
   } else {
     res.redirect("/");
@@ -71,10 +73,11 @@ router.get("/index", (req, res) => {
 
 router.get("/perfil", (req, res) => {
   if (req.isAuthenticated()) {
-    const nomeUsuario = req.user.nome || req.user.displayName;
-    const emailUsuario = req.user.email;
-    const dataNasc = req.user.data;
-    res.render("perfil", { nomeUsuario, emailUsuario, dataNasc });
+    nomeUsuario = req.user.nome || req.user.displayName;
+    emailUsuario = req.user.email;
+    dataNasc = req.user.data;
+    imagemPerfil = req.user.picture || "/img/imagem_perfil.webp";
+    res.render("perfil", { nomeUsuario, emailUsuario, dataNasc, imagemPerfil });
   } else {
     res.redirect("/");
   }
@@ -104,12 +107,6 @@ router.post("/cadastro", async (req, res) => {
   }
 });
 
-router.post("/publicar", upload.single('imagem'), (req, res) => {
-  const imagePath = `/uploads/${req.file.filename}`;
-  const nomeUsuario = req.user.nome || req.user.displayName;
-  const texto = req.body.texto;
-  res.render("index", { nomeUsuario, texto, imagePath });
-});
 
 router.get("/logout", (req, res) => {
   const successMessage = "Você saiu da sua conta";
@@ -121,25 +118,25 @@ router.get("/logout", (req, res) => {
     res.render("login", { message: null, success: successMessage });
   });
 });
+router.get("/editarPerfil", (req, res) => {
+  nomeUsuario = req.user.nome || req.user.displayName;
+  emailUsuario = req.user.email;
+  dataNasc = req.user.data;
+  imagemPerfil = req.user.picture || "/img/imagem_perfil.webp";
+  res.render("editarPerfil", { nomeUsuario, emailUsuario, dataNasc, imagemPerfil });
+});
 
 router.post("/atualizarperfil", async (req, res) => {
   if (req.isAuthenticated()) {
-    try {
-      const nomeUsuario = req.body.nomeUsuario;
-      const emailUsuario = req.body.emailUsuario;
-      const dataNasc = req.body.dataNasc;
+      const idUsuario = req.user.id;
+        nomeUsuario = req.body.nome;
+        emailUsuario = req.body.email;
+        dataNasc = req.body.data;
+        
 
-      await atualizarPerfil(emailUsuario, nomeUsuario, dataNasc);
-      console.log(nomeUsuario);
-
-      res.redirect("/perfil");
-    } catch (err) {
-      console.error("Erro ao editar perfil:", err);
-      res.redirect("/perfil");
+      await atualizarPerfil(idUsuario, emailUsuario, nomeUsuario, dataNasc);
+    res.redirect("/index");
     }
-  } else {
-    res.redirect("/");
-  }
 });
 
 
