@@ -128,15 +128,19 @@ router.get("/editarPerfil", (req, res) => {
 
 router.post("/atualizarperfil", async (req, res) => {
   if (req.isAuthenticated()) {
-      const idUsuario = req.user.id;
-        nomeUsuario = req.body.nome;
-        emailUsuario = req.body.email;
-        dataNasc = req.body.data;
-        
+    const idUsuario = req.user.id;
+    const nomeUsuario = req.body.nome;
+    const emailUsuario = req.body.email;
+    const dataNasc = req.body.data;
 
-      await atualizarPerfil(idUsuario, emailUsuario, nomeUsuario, dataNasc);
+    await atualizarPerfil(idUsuario, emailUsuario, nomeUsuario, dataNasc);
+
+    // Atualize os dados do usuário na sessão
+    req.user.nome = nomeUsuario;
+    req.user.email = emailUsuario;
+    req.user.data = dataNasc;
     res.redirect("/index");
-    }
+  }
 });
 
 
