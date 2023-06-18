@@ -21,23 +21,6 @@ async function withMongoDb(callback) {
   }
 }
 
-async function atualizarPerfil(idUsuario, emailUsuario, nomeUsuario, dataNasc) {
-  try {
-    await withMongoDb(async (collection) => {
-      await collection.updateOne(
-        { id: idUsuario },
-        { $set: { nome: nomeUsuario, email:emailUsuario, data: dataNasc } }
-      );
-      console.log("Perfil atualizado com sucesso.");
-    });
-  } catch (err) {
-    console.error("Erro ao atualizar perfil:", err);
-    throw err;
-  }
-}
-
-
-
 function readData() {
   return withMongoDb(async (collection) => {
     const data = await collection.find({}).toArray();
@@ -62,6 +45,20 @@ async function findUserById(id) {
   return await withMongoDb(async (collection) => {
     return await collection.findOne({ id: id });
   });
+}
+
+async function atualizarPerfil(idUsuario, emailUsuario, nomeUsuario, dataNasc) {
+  try {
+    await withMongoDb(async (collection) => {
+      await collection.updateOne(
+        { id: idUsuario },
+        { $set: { nome: nomeUsuario, email:emailUsuario, data: dataNasc } }
+      );
+    });
+  } catch (err) {
+    console.error("Erro ao atualizar perfil:", err);
+    throw err;
+  }
 }
 
 module.exports = {

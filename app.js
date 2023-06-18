@@ -10,11 +10,8 @@ const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const flash = require("connect-flash");
 const session = require("express-session");
-const { findUserByEmail, findUserById } = require("./auth/filestorage");
+const { findUserByEmail } = require("./auth/filestorage");
 
-const multer = require('multer');
-
-const { google } = require("googleapis");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 
 app.set("view engine", "ejs");
@@ -23,8 +20,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(
-  session({
+app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
@@ -35,16 +31,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-passport.use(
-  new LocalStrategy(
-    { usernameField: "email" },
+passport.use(new LocalStrategy(
+  { usernameField: "email" },
     async (email, password, done) => {
       try {
         const user = await findUserByEmail(email);
         if (!user) {
           return done(null, false, { message: "Usuário não encontrado" });
         }
-
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
           if (isMatch) {
@@ -52,8 +46,7 @@ passport.use(
           } else {
             return done(null, false, { message: "Senha incorreta" });
           }
-        });
-        
+        });   
       } catch (err) {
         console.error(err);
         return done(err);
@@ -62,8 +55,7 @@ passport.use(
   )
 );
 
-passport.use(
-  new GoogleStrategy(
+passport.use(new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -71,9 +63,6 @@ passport.use(
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
-      const birthdate = profile._json.birthdate;
-      console.log("Data de nascimento do google:"+birthdate);
-      console.log(profile)
       return done(null, profile);
     }
   )
@@ -91,8 +80,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Algo deu errado!");
 });
-
-app.use('/uploads', express.static('uploads'));
 
 app.use("/", routes);
 

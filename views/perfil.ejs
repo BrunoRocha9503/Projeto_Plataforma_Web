@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="PT-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css"/>
-    <title>Perfil</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/style.css" />
+	<title>Perfil</title>
 </head>
+
 <body>
 	<header>
-        <div>
-          <img class="logo img-fluid" src="/img/logo_SocialBlend.png"/>
-        </div>
-        <nav>
-          <ul class="nav-list">
-            <li><a href="/index">Início</a></li>
-            <li><a href="/perfil">Perfil</a></li>
-            <li><a href="/">Sair</a></li>
-          </ul> 
-        </nav>
-    </header>
+		<div>
+			<img class="logo img-fluid" src="/img/logo_SocialBlend.png" />
+		</div>
+		<nav>
+			<ul class="nav-list">
+				<li><a href="/index">Início</a></li>
+				<li><a href="/perfil">Perfil</a></li>
+				<li><a href="/">Sair</a></li>
+			</ul>
+		</nav>
+	</header>
 	<section class="perfil">
 		<img class="img-fluid img-thumbnail" src="<%= imagemPerfil %>" alt="Imagem de perfil">
 		<div class="container mt-3">
 			<h2>Perfil do Usuário</h2>
 			<hr>
-			<p><b>Nome:</b> <%= nomeUsuario %></p>
-			<p><b>Email:</b> <%= emailUsuario %></p>
-			<p><b>Data de Nascimento:</b> <%= dataNasc %></p>
-			<button type="button" class="btn btn-lg"><a href="/editarPerfil">Editar</a></button>		
+			<p><b>Nome:</b>
+				<%= nomeUsuario %>
+			</p>
+			<p><b>Email:</b>
+				<%= emailUsuario %>
+			</p>
+			<p><b>Data de Nascimento:</b>
+				<%= dataNasc %>
+			</p>
+			<button type="button" class="btn btn-lg"><a href="/editarPerfil">Editar</a></button>
 		</div>
 	</section>
 	<footer>
 		<p>© 2023 Social Blend. Todos os direitos reservados.</p>
 		<ul>
-		  <li><a href="#">Política de privacidade</a></li>
-		  <li><a href="#">Termos de uso</a></li>
+			<li><a href="#">Política de privacidade</a></li>
+			<li><a href="#">Termos de uso</a></li>
 		</ul>
 	</footer>
 </body>
+
 </html>

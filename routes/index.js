@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { readData, writeData, atualizarPerfil } = require("../auth/filestorage");
-const multer = require('multer');
+const { writeData, atualizarPerfil } = require("../auth/filestorage");
 
 let users = [];
 
@@ -11,55 +10,50 @@ let imagePath = "";
 let texto = "";
 let nomeUsuario = "";
 
-async function loadUsers() {
-  try {
-    users = await readData();
-  } catch (err) {
-    console.error("Erro ao ler dados do MongoDB:", err);
-  }
-}
-
-loadUsers();
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
-
-const upload = multer({ storage: storage });
-
 router.get("/", (req, res) => {
-  res.render("login", {
-    message: req.flash("error"),
-    success: req.flash("success")[0],
-  });
+  res.render("login");
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
+router.post("/login", passport.authenticate("local", {
     successRedirect: "/index",
     failureRedirect: "/",
     failureFlash: true,
   })
 );
 
-router.get("/auth/google",
-  passport.authenticate("google", {
+router.get("/auth/google", passport.authenticate("google", {
     scope: ["profile", "email"],
   })
 );
 
-router.get("/auth/google/callback",
-  passport.authenticate("google", {
+router.get("/auth/google/callback", passport.authenticate("google", {
     successRedirect: "/index",
     failureRedirect: "/",
   })
 );
+
+router.get("/cadastro", (req, res) => {
+  res.render("cadastro");
+});
+
+router.post("/cadastro", async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = {
+      id: Date.now(),
+      nome: req.body.nome,
+      email: req.body.email,
+      data: req.body.data,
+      password: hashedPassword,
+    };
+    users.push(user);
+    await writeData(users);
+    res.redirect("/");
+  } catch (err) {
+    req.flash("error", "Ocorreu um erro ao tentar criar a conta");
+    res.redirect("/cadastro");
+  }
+});
 
 router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {   
@@ -83,41 +77,6 @@ router.get("/perfil", (req, res) => {
   }
 });
 
-router.get("/cadastro", (req, res) => {
-  res.render("cadastro", { message: req.flash("error") });
-});
-
-router.post("/cadastro", async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = {
-      id: Date.now(),
-      nome: req.body.nome,
-      email: req.body.email,
-      data: req.body.data,
-      password: hashedPassword,
-    };
-    users.push(user);
-    await writeData(users);
-    res.redirect("/");
-
-  } catch (err) {
-    req.flash("error", "Ocorreu um erro ao tentar criar a conta");
-    res.redirect("/cadastro");
-  }
-});
-
-
-router.get("/logout", (req, res) => {
-  const successMessage = "Você saiu da sua conta";
-  req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-      return res.redirect("/index");
-    }
-    res.render("login", { message: null, success: successMessage });
-  });
-});
 router.get("/editarPerfil", (req, res) => {
   nomeUsuario = req.user.nome || req.user.displayName;
   emailUsuario = req.user.email;
@@ -140,6 +99,16 @@ router.post("/atualizarperfil", async (req, res) => {
     req.user.data = dataNasc;
     res.redirect("/perfil");
   }
+});
+
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+      return res.redirect("/index");
+    }
+    res.render("login");
+  });
 });
 
 

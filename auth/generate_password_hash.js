@@ -8,6 +8,4 @@ bcrypt.hash(password, saltRounds, (err, hash) => {
     console.error(err);
     return;
   }
-
-  console.log(`Senha criptografada: ${hash}`);
 });

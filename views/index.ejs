@@ -26,10 +26,11 @@
   </header>
   <main>
     <section class="publicacao">
-      <h1>Olá,<b><%= nomeUsuario %>!</b></h1>
+      <h1>Olá,<b>
+          <%= nomeUsuario %>!
+        </b></h1>
       <h5>Faça sua publicação</h5>
-      <form action="/publicar" method="post" enctype="multipart/form-data" id="publicacaoForm"
-        onsubmit="submitForm(event)">
+      <form id="publicacaoForm" onsubmit="submitForm(event)">
         <textarea name="texto" id="textoInput" placeholder="Digite seu texto aqui"></textarea>
         <div class="mb-3">
           <label for="photoInput" class="form-label">Selecione uma imagem</label>
@@ -51,7 +52,6 @@
       <li><a href="#">Termos de uso</a></li>
     </ul>
   </footer>
-
   <script>
     function postPhoto() {
       var accessToken = '<%= token %>';
@@ -71,16 +71,13 @@
           var textoInput = document.getElementById('textoInput');
           var texto = textoInput.value;
 
-          // Adiciona o texto como descrição da foto
           addDescriptionToPhoto(postId, texto);
 
-          var imagePath = URL.createObjectURL(photoFile); // Obtém a URL da imagem local
-          // Adiciona a foto no feed de publicações
+          var imagePath = URL.createObjectURL(photoFile);
           addPhotoToFeed(postId, texto, imagePath);
         })
         .catch(error => {
           console.error('Erro ao postar foto no Facebook:', error);
-          // Faça algo em caso de erro ao postar a foto
         });
     }
 
@@ -95,18 +92,14 @@
         .then(response => response.json())
         .then(data => {
           console.log('Descrição adicionada à foto:', data);
-          // Faça algo após adicionar a descrição com sucesso
         })
         .catch(error => {
           console.error('Erro ao adicionar descrição à foto:', error);
-          // Faça algo em caso de erro ao adicionar a descrição
         });
     }
 
     function addPhotoToFeed(postId, texto, imagePath) {
       var postList = document.getElementById('post-list');
-
-      // Cria elementos HTML para exibir a foto e informações no feed
       var liElement = document.createElement('li');
       var nameElement = document.createElement('p');
       var textElement = document.createElement('p');
@@ -115,7 +108,7 @@
       nameElement.textContent = 'Nome: <%= nomeUsuario %>';
       textElement.textContent = 'Descrição: ' + texto;
       imageElement.className = 'logo img-fluid';
-      imageElement.src = imagePath; // Define a imagem selecionada como a origem da imagem
+      imageElement.src = imagePath; 
       imageElement.alt = 'Imagem selecionada';
 
       liElement.appendChild(nameElement);
@@ -130,29 +123,6 @@
       this.submit();
     });
   </script>
-
-  <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        appId: 'FACEBOOK_CLIENT_ID',
-        cookie: true,
-        xfbml: true,
-        version: 'v17.0'
-      });
-
-      FB.AppEvents.logPageView();
-
-    };
-
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-
 </body>
 
 </html>

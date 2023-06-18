@@ -82,117 +82,118 @@ main {
 
 .feed {
   margin-bottom: 40px;
-  }
-  
-  .feed h2 {
+}
+
+.feed h2 {
   font-size: 24px;
   margin-bottom: 10px;
-  }
-  
-  .feed ul {
+}
+
+.feed ul {
   list-style: none;
   padding: 0;
-  }
-  
-  .feed li {
+}
+
+.feed li {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 20px;
-  }
-  
-  .feed .autor {
+}
+
+.feed .autor {
   font-weight: bold;
   margin-bottom: 5px;
-  }
-  
-  .feed .data {
+}
+
+.feed .data {
   color: #666;
   font-size: 14px;
   margin-bottom: 5px;
-  }
-  
-  .feed .texto {
-  margin-top: 10px;
-  }
+}
 
-  .perfil {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: 20px;
-	text-align: center;
+.feed .texto {
+  margin-top: 10px;
+}
+
+.perfil {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
 }
 
 .perfil img {
-  width:150px;
+  width: 150px;
   height: 150px;
-	border-radius: 50%;
-	object-position: center;
-	margin-bottom: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .perfil h2 {
-	font-size: 24px;
-	margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .perfil p {
-	margin-bottom: 5px;
+  margin-bottom: 5px;
   padding-bottom: 10px;
 }
 
 .perfil a {
-	display: inline-block;
-	margin-top: 20px;
-	padding: 10px 20px;
-	background-color: #20B383;
-	color: #fff;
-	text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #20B383;
+  color: #fff;
+  text-decoration: none;
   border-radius: 30px;
-	transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 .perfil a:hover {
-	background-color: #007D52;
+  background-color: #007D52;
 }
 
 .perfilEdit {
   width: 100%;
-	margin: 0 auto;
-	padding: 20px;
-	text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
 }
 
 .perfilEdit h2 {
-	font-size: 24px;
-	margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .perfilEdit img {
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
-	object-fit: cover;
-	object-position: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.perfilEdit .container{
+.perfilEdit .container {
   align-items: center;
   justify-content: center;
   width: 30%;
   height: auto;
 }
-.perfilEdit .row{
+
+.perfilEdit .row {
   justify-content: center;
 }
 
-.perfilEdit input{
+.perfilEdit input {
   border-radius: 30px;
 }
 
 .perfilEdit button[type="submit"] {
   background-color: #20B383;
-  color: #fff;  
+  color: #fff;
   border-radius: 30px;
   width: 50%;
   padding: 5px;
@@ -230,75 +231,76 @@ footer a:hover {
   text-decoration: underline;
 }
 
-  .login{
-    align-items: center;
-    justify-content: center;
-    background-color: #F4FAFF;
-    width: 30%;
-    height: 60vh;
-  }
+.login {
+  align-items: center;
+  justify-content: center;
+  background-color: #F4FAFF;
+  width: 30%;
+  height: 60vh;
+}
 
-  .login .row{
-    justify-content: center;
-  }
+.login .row {
+  justify-content: center;
+}
 
-  .login input{
-    border-radius: 30px;
-  }
+.login input {
+  border-radius: 30px;
+}
 
-  .login button[type="submit"] {
-    background-color: #20B383;
-    color: #fff;  
-    border-radius: 30px;
-    width: 100%;
-    padding: 5px;
-  }
+.login button[type="submit"] {
+  background-color: #20B383;
+  color: #fff;
+  border-radius: 30px;
+  width: 100%;
+  padding: 5px;
+}
 
-  .login button:hover {
-    background-color: #007D52;
-  }
+.login button:hover {
+  background-color: #007D52;
+}
 
-  .login a {
-    color: #0098FA;
-    text-decoration: none;
-  }
+.login a {
+  color: #0098FA;
+  text-decoration: none;
+}
 
-  .login a:hover{
-    color: #007fd4;
-  }
+.login a:hover {
+  color: #007fd4;
+}
 
-  .cadastro{
-    align-items: center;
-    justify-content: center;
-    background-color: #F4FAFF;
-    width: 30%;
-    height: 70vh;
-  }
-  .cadastro .row{
-    justify-content: center;
-  }
+.cadastro {
+  align-items: center;
+  justify-content: center;
+  background-color: #F4FAFF;
+  width: 30%;
+  height: 70vh;
+}
 
-  .cadastro input{
-    border-radius: 30px;
-  }
+.cadastro .row {
+  justify-content: center;
+}
 
-  .cadastro button[type="submit"] {
-    background-color: #20B383;
-    color: #fff;  
-    border-radius: 30px;
-    width: 100%;
-    padding: 5px;
-  }
+.cadastro input {
+  border-radius: 30px;
+}
 
-  .cadastro button:hover {
-    background-color: #007D52;
-  }
+.cadastro button[type="submit"] {
+  background-color: #20B383;
+  color: #fff;
+  border-radius: 30px;
+  width: 100%;
+  padding: 5px;
+}
 
-  .cadastro a {
-    color: #0098FA;
-    text-decoration: none;
-  }
+.cadastro button:hover {
+  background-color: #007D52;
+}
 
-  .cadastro a:hover{
-    color: #007fd4;
-  }
+.cadastro a {
+  color: #0098FA;
+  text-decoration: none;
+}
+
+.cadastro a:hover {
+  color: #007fd4;
+}
