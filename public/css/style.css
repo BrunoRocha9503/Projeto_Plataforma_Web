@@ -71,7 +71,7 @@ main {
   color: #fff;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
@@ -124,10 +124,9 @@ main {
 }
 
 .perfil img {
-	width: 200px;
-	height: 200px;
+  width:150px;
+  height: 150px;
 	border-radius: 50%;
-	object-fit: cover;
 	object-position: center;
 	margin-bottom: 20px;
 }
@@ -139,6 +138,7 @@ main {
 
 .perfil p {
 	margin-bottom: 5px;
+  padding-bottom: 10px;
 }
 
 .perfil a {
@@ -148,7 +148,7 @@ main {
 	background-color: #20B383;
 	color: #fff;
 	text-decoration: none;
-	border-radius: 5px;
+  border-radius: 30px;
 	transition: background-color 0.2s;
 }
 
@@ -163,10 +163,14 @@ main {
 	text-align: center;
 }
 
+.perfilEdit h2 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
 
 .perfilEdit img {
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
 	border-radius: 50%;
 	object-fit: cover;
 	object-position: center;
@@ -190,7 +194,7 @@ main {
   background-color: #20B383;
   color: #fff;  
   border-radius: 30px;
-  width: 100%;
+  width: 50%;
   padding: 5px;
 }
 

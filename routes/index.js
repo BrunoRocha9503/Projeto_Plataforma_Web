@@ -23,7 +23,7 @@ loadUsers();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads'); // diretório onde os arquivos serão salvos
+    cb(null, 'uploads');
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -62,7 +62,7 @@ router.get("/auth/google/callback",
 );
 
 router.get("/index", (req, res) => {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated()) {   
     const token = process.env.SESSION_SECRET_FB;
     nomeUsuario = req.user.nome || req.user.displayName;
     res.render("index", { nomeUsuario, texto, imagePath, token });
@@ -135,11 +135,10 @@ router.post("/atualizarperfil", async (req, res) => {
 
     await atualizarPerfil(idUsuario, emailUsuario, nomeUsuario, dataNasc);
 
-    // Atualize os dados do usuário na sessão
     req.user.nome = nomeUsuario;
     req.user.email = emailUsuario;
     req.user.data = dataNasc;
-    res.redirect("/index");
+    res.redirect("/perfil");
   }
 });
 

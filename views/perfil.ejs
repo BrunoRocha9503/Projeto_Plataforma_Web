@@ -22,16 +22,15 @@
         </nav>
     </header>
 	<section class="perfil">
-		<img src="<%= imagemPerfil %>" alt="Imagem de perfil">
-
-		<p><b>Nome:</b> <%= nomeUsuario %></p>
-		<hr>
-		<p><b>Email:</b> <%= emailUsuario %></p>
-		<hr>
-		<p><b>Data de nascimento:</b> <%= dataNasc %></p>
-		<hr>
-		<button type="button" class="btn btn-lg"><a href="/editarPerfil">Editar</a></button>		
-		  
+		<img class="img-fluid img-thumbnail" src="<%= imagemPerfil %>" alt="Imagem de perfil">
+		<div class="container mt-3">
+			<h2>Perfil do Usuário</h2>
+			<hr>
+			<p><b>Nome:</b> <%= nomeUsuario %></p>
+			<p><b>Email:</b> <%= emailUsuario %></p>
+			<p><b>Data de Nascimento:</b> <%= dataNasc %></p>
+			<button type="button" class="btn btn-lg"><a href="/editarPerfil">Editar</a></button>		
+		</div>
 	</section>
 	<footer>
 		<p>© 2023 Social Blend. Todos os direitos reservados.</p>

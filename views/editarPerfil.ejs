@@ -22,30 +22,33 @@
         </nav>
     </header>
 	<section class="perfilEdit">
-		<img src="<%= imagemPerfil %>" alt="Imagem de perfil">
-        <div class="container mt-5">
+		<img class="img-fluid img-thumbnail" src="<%= imagemPerfil %>" alt="Imagem de perfil">
+        <div class="container mt-3">
             <div class="row">
-                <div class="col-md-8 mt-5">
+                <div class="col-md-8">
+                    <h2>Editar dados</h2>
+			        <hr>
                     <form action="/atualizarperfil" method="post">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="nome" placeholder="<%= nomeUsuario %>" required>
+                            <input type="text" class="form-control" name="nome" value="<%= nomeUsuario %>" required>
                             <label for="nome" class="label">Nome</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="E-mail" required>
+                            <input type="email" class="form-control" name="email" value="<%= emailUsuario %>" required>
                             <label class="label" for="email">E-mail</label>
                         </div>
                         <div class="form-floating mt-2">
-                            <input type="date" class="form-control" name="data" placeholder="Data de Nascimento" required>
+                            <input type="date" class="form-control" name="data" value="<%= dataNasc %>" required>
                             <label class="label" for="data">Data de Nascimento</label>
                         </div>
-                        <div class="text-center mt-5">
+                        <div class="text-center mt-3">
                             <button type="submit" class="btn btn-lg">Atualizar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        
 	</section>
 	<footer>
 		<p>© 2023 Social Blend. Todos os direitos reservados.</p>

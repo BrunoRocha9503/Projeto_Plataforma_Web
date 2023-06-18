@@ -71,6 +71,9 @@ passport.use(
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
+      const birthdate = profile._json.birthdate;
+      console.log("Data de nascimento do google:"+birthdate);
+      console.log(profile)
       return done(null, profile);
     }
   )

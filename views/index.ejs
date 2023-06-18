@@ -35,7 +35,7 @@
           <label for="photoInput" class="form-label">Selecione uma imagem</label>
           <input type="file" id="photoInput" name="imagem" accept="image/*" class="form-control">
         </div>
-        <button onclick="postPhoto()" type="button" class="btn btn-primary">Postar Foto</button>
+        <button onclick="postPhoto()" type="button" class="btn btn-primary">Publicar</button>
       </form>
     </section>
     <section class="feed">
@@ -113,7 +113,7 @@
       var imageElement = document.createElement('img');
 
       nameElement.textContent = 'Nome: <%= nomeUsuario %>';
-      textElement.textContent = 'Texto: ' + texto;
+      textElement.textContent = 'Descrição: ' + texto;
       imageElement.className = 'logo img-fluid';
       imageElement.src = imagePath; // Define a imagem selecionada como a origem da imagem
       imageElement.alt = 'Imagem selecionada';
