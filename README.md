@@ -12,7 +12,32 @@ Funcionalidades:
 -	Interface amigável e intuitiva.
 
 Stakeholders:
--	Kelvin Willian
--	Eduardo Veiga
 -	Bruno Rocha
+-   Edison Tezolin
+-	Eduardo Veiga
+-	Kelvin Willian
 -	Willian Tezolin
+
+
+#Docker
+
+- Segue abaixo o passo a passo para inicializar o projeto utilizando o Docker:
+
+- Passo 01: script para criação do arquivo Dockerfile
+
+    FROM node:18
+    WORKDIR /
+    COPY . .
+    RUN npm cache clean --force
+    RUN rm -rf node_modules
+    RUN npm install
+    CMD ["npm", "start"]
+    EXPOSE 3000
+
+- Passo 02: comando para criação da imagem docker
+
+    docker build -t app .
+
+- Passo 03: comando para inicializar o container docker
+
+    docker run -p 3000:3000 app

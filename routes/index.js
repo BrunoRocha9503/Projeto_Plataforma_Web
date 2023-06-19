@@ -6,8 +6,6 @@ const { writeData, atualizarPerfil } = require("../auth/filestorage");
 
 let users = [];
 
-let imagePath = "";
-let texto = "";
 let nomeUsuario = "";
 
 router.get("/", (req, res) => {
@@ -59,7 +57,7 @@ router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {   
     const token = process.env.SESSION_SECRET_FB;
     nomeUsuario = req.user.nome || req.user.displayName;
-    res.render("index", { nomeUsuario, texto, imagePath, token });
+    res.render("index", { nomeUsuario, token });
   } else {
     res.redirect("/");
   }
